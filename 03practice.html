@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        section {
+            height: 1px;
+            margin-bottom: 80vh;
+        
+        }
+        *{
+            background-color:cornsilk;
+        }
+        
+        .google {
+            width: 1000px;
+            height: 40px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 24px;
+            margin-left: 20vh;
+            background-color:white;
+        }
+
+        .button {
+            margin-left: 500px;
+            margin-bottom:10px;
+            padding: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            justify-content: center;
+            background-color: white;
+        }
+
+        #flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .node {
+            border: 1px solid black;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: lightgray;
+            text-align: center;
+            width: 150px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .editable {
+            background-color: yellow;
+        }
+        .h{
+            text-align: center;
+            padding: 10vh;
+        }
+
+        .arrow {
+            width: 2px;
+            height: 20px;
+            background-color: black;
+            margin: 0 auto;
+        }
+
+         
+        
+    </style>
+    <title>Flowchart Generator</title>
+</head>
+<body><span class="sub">
+    <section>
+    
+<h2 class="h">Flowchart</h2>
+
+    <header><input type="search" placeholder="Search or type url" class="google"></header>
+</section>
+</span>
+<main>
+    <button onclick="drawFlowchart()" class="button">Draw Flowchart</button>
+    <button onclick="toggleEditMode()" class="button">Edit Flowchart</button>
+</main>
+
+<div id="flowchart"></div>
+
+<script>
+    let editMode = false;
+
+    function toggleEditMode() {
+        editMode = !editMode;
+        document.querySelectorAll('.node').forEach(node => {
+            node.contentEditable = editMode;
+            node.classList.toggle("editable", editMode);       });
+    }
+
+    function drawFlowchart() {
+        const flowchartContainer = document.getElementById("flowchart");
+        flowchartContainer.innerHTML = ""; 
+
+        const nodes = [
+            "Start",
+            "Input X, Y",
+            "Sum = X + Y",
+            "Display Sum",
+            "End"
+        ];
+
+        nodes.forEach((text, index) => {
+            const nodeDiv = document.createElement("div");
+            nodeDiv.classList.add("node");
+            nodeDiv.textContent = text;
+            
+            flowchartContainer.appendChild(nodeDiv);
+
+            if (index < nodes.length - 1) {
+                const arrowDiv = document.createElement("div");
+                arrowDiv.classList.add("arrow");
+                flowchartContainer.appendChild(arrowDiv);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
